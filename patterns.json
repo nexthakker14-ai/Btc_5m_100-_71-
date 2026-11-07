@@ -391,57 +391,6 @@
     "historical_losses": 0
   },
   {
-    "id": "P24",
-    "positions": [
-      1,
-      3,
-      13,
-      14,
-      16,
-      18
-    ],
-    "pattern": "RGGGRG",
-    "direction": "SHORT",
-    "emoji": "🔴🟢🟢🟢🔴🟢",
-    "historical_signals": 788,
-    "historical_wins": 788,
-    "historical_losses": 0
-  },
-  {
-    "id": "P25",
-    "positions": [
-      1,
-      4,
-      11,
-      12,
-      14,
-      16
-    ],
-    "pattern": "GGGGRG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🔴🟢",
-    "historical_signals": 783,
-    "historical_wins": 783,
-    "historical_losses": 0
-  },
-  {
-    "id": "P26",
-    "positions": [
-      1,
-      5,
-      10,
-      13,
-      18,
-      20
-    ],
-    "pattern": "RGGGRG",
-    "direction": "SHORT",
-    "emoji": "🔴🟢🟢🟢🔴🟢",
-    "historical_signals": 783,
-    "historical_wins": 783,
-    "historical_losses": 0
-  },
-  {
     "id": "P27",
     "positions": [
       1,

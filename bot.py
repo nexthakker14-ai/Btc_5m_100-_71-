@@ -23,8 +23,8 @@ log = logging.getLogger("btc5m")
 
 with PATTERNS_FILE.open("r", encoding="utf-8") as f:
     PATTERNS = json.load(f)
-if len(PATTERNS) != 71:
-    raise RuntimeError(f"Очікується рівно 71 шаблон, отримано {len(PATTERNS)}")
+if len(PATTERNS) != 68:
+    raise RuntimeError(f"Очікується рівно 68 шаблонів, отримано {len(PATTERNS)}")
 
 
 def candle_color(o, c):
