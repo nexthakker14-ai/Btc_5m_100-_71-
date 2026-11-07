@@ -23,8 +23,8 @@ log = logging.getLogger("btc5m")
 
 with PATTERNS_FILE.open("r", encoding="utf-8") as f:
     PATTERNS = json.load(f)
-if len(PATTERNS) != 71:
-    raise RuntimeError(f"Очікується рівно 71 шаблон, отримано {len(PATTERNS)}")
+if len(PATTERNS) != 68:
+    raise RuntimeError(f"Очікується рівно 68 шаблонів, отримано {len(PATTERNS)}")
 
 
 def candle_color(o, c):
@@ -133,7 +133,19 @@ async def process_new_closed(app, closed):
                         ps["stats"]["wins" if result == "WIN" else "losses"] += 1
                         STATE["stats"]["signals"] += 1
                         STATE["stats"]["wins" if result == "WIN" else "losses"] += 1
-                        await send_message(app, f"{'✅' if result == 'WIN' else '❌'} {result}\n{p['direction']} • BTC_USDT • 5m\nШаблон: {p['emoji']} {p['pattern']}\nПеревірено 6 свічок: {' '.join(active['colors'])}")
+                        if result == "WIN":
+                            wanted_index = active["colors"].index(wanted) + 1
+                            result_detail = f"\\n🏆 Переможна свічка: {wanted_index}/6"
+                        else:
+                            result_detail = "\\n🏁 За 6 свічок потрібного кольору не було."
+                        await send_message(
+                            app,
+                            f"{'✅' if result == 'WIN' else '❌'} {result}\\n"
+                            f"{p['direction']} • BTC_USDT • 5m\\n"
+                            f"Шаблон: {p['emoji']} {p['pattern']}\\n"
+                            f"Перевірено 6 свічок: {' '.join(active['colors'])}"
+                            f"{result_detail}"
+                        )
                     else:
                         await send_message(app, f"⚪ VOID / НЕВИЗНАЧЕНО\nШаблон: {p['emoji']} {p['pattern']}\nУ 6 свічках був doji, результат за правилами не визначений.")
                     # New cycle starts after the full 6-candle result window.
