@@ -94,14 +94,6 @@ def signal_text(p, final_ts):
             f"ℹ️ Це сигнал для тестування, не гарантія результату. Бот не відкриває угоди.")
 
 
-def pre_text(p, final_ts):
-    return (f"⚠️ PRE — можливий {p['direction']} сигнал\n"
-            f"📊 BTC_USDT Futures • 5 хв\n"
-            f"🧩 {p['emoji']} ({p['pattern']})\n"
-            f"Остання потрібна свічка зараз формується. Після її закриття перевірю шаблон і надішлю SIGNAL лише за повного збігу.\n"
-            f"Очікуване закриття: {fmt_time(final_ts)}")
-
-
 async def send_message(app, text):
     target = CHAT_ID or STATE.get("chat_id")
     if target:
@@ -125,21 +117,41 @@ async def process_new_closed(app, closed):
                 active["checked"] += 1
                 active["last_checked_ts"] = c["ts"]
                 active["colors"].append(color)
-                if active["checked"] >= 6:
-                    wanted = "G" if p["direction"] == "LONG" else "R"
-                    result = "WIN" if wanted in active["colors"] else ("LOSS" if all(x == ("R" if wanted == "G" else "G") for x in active["colors"]) else "VOID")
-                    if result in ("WIN", "LOSS"):
-                        ps["stats"]["signals"] += 1
-                        ps["stats"]["wins" if result == "WIN" else "losses"] += 1
-                        STATE["stats"]["signals"] += 1
-                        STATE["stats"]["wins" if result == "WIN" else "losses"] += 1
-                        await send_message(app, f"{'✅' if result == 'WIN' else '❌'} {result}\n{p['direction']} • BTC_USDT • 5m\nШаблон: {p['emoji']} {p['pattern']}\nПеревірено 6 свічок: {' '.join(active['colors'])}")
-                    else:
-                        await send_message(app, f"⚪ VOID / НЕВИЗНАЧЕНО\nШаблон: {p['emoji']} {p['pattern']}\nУ 6 свічках був doji, результат за правилами не визначений.")
-                    # New cycle starts after the full 6-candle result window.
-                    ps["next_start_ts"] = active["last_checked_ts"] + TF_SECONDS
-                    ps["active"] = None
-                    break
+                wanted = "G" if p["direction"] == "LONG" else "R"
+                opposite = "R" if wanted == "G" else "G"
+                if color == wanted:
+                    result = "WIN"
+                    win_candle = active["checked"]
+                elif active["checked"] >= 6:
+                    result = "LOSS" if all(x == opposite for x in active["colors"]) else "VOID"
+                    win_candle = None
+                else:
+                    continue
+
+                if result in ("WIN", "LOSS"):
+                    ps["stats"]["signals"] += 1
+                    ps["stats"]["wins" if result == "WIN" else "losses"] += 1
+                    STATE["stats"]["signals"] += 1
+                    STATE["stats"]["wins" if result == "WIN" else "losses"] += 1
+                    result_label = f"WIN {win_candle}/6" if result == "WIN" else "LOSS"
+                    await send_message(
+                        app,
+                        f"{'✅' if result == 'WIN' else '❌'} {result_label}\\n"
+                        f"{p['direction']} • BTC_USDT • 5m\\n"
+                        f"Шаблон: {p['emoji']} {p['pattern']}\\n"
+                        f"Свічки результату: {' '.join(active['colors'])}"
+                    )
+                else:
+                    await send_message(
+                        app,
+                        f"⚪ VOID / НЕВИЗНАЧЕНО\\n"
+                        f"Шаблон: {p['emoji']} {p['pattern']}\\n"
+                        f"За 6 свічок не було WIN, але трапився doji."
+                    )
+
+                ps["next_start_ts"] = active["last_checked_ts"] + TF_SECONDS
+                ps["active"] = None
+                break
             continue
 
         if ps.get("next_start_ts") is None:
@@ -167,41 +179,10 @@ async def process_new_closed(app, closed):
                 ps["active"] = {"signal_ts": final_ts, "checked": 0, "colors": [], "last_checked_ts": final_ts}
                 ps["pre_sent_for"] = None
                 await send_message(app, signal_text(p, final_ts))
-                # If the API returned subsequent candles in the same batch, outcome is processed next poll.
                 break
             start_ts += TF_SECONDS
         ps["next_start_ts"] = start_ts
     STATE["last_closed_ts"] = latest_ts
-    save_state()
-
-
-async def process_pre(app, candles, now_ts):
-    """Send PRE once when current forming candle is the final required position."""
-    if not candles:
-        return
-    current = candles[-1]
-    current_ts = current["ts"]
-    closed = [c for c in candles if c["ts"] + TF_SECONDS <= now_ts]
-    closed_by_ts = {c["ts"]: c for c in closed}
-    for p in PATTERNS:
-        ps = STATE["patterns"][p["id"]]
-        if ps.get("active"):
-            continue
-        final_offset = (p["positions"][-1] - 1) * TF_SECONDS
-        start_ts = current_ts - final_offset
-        if ps.get("next_start_ts") is None or start_ts < int(ps["next_start_ts"]):
-            continue
-        if ps.get("pre_sent_for") == current_ts:
-            continue
-        matched = True
-        for pos, expected in zip(p["positions"][:-1], p["pattern"][:-1]):
-            c = closed_by_ts.get(start_ts + (pos - 1) * TF_SECONDS)
-            if c is None or candle_color(c["open"], c["close"]) != expected:
-                matched = False
-                break
-        if matched:
-            await send_message(app, pre_text(p, current_ts + TF_SECONDS))
-            ps["pre_sent_for"] = current_ts
     save_state()
 
 
@@ -215,7 +196,6 @@ async def tick(app):
         last_seen = STATE.get("last_closed_ts")
         if last_seen is None:
             ensure_pattern_state()
-            # Establish a clean starting point on first launch.
             for p in PATTERNS:
                 ps = STATE["patterns"][p["id"]]
                 if ps.get("next_start_ts") is None:
@@ -225,9 +205,7 @@ async def tick(app):
         else:
             fresh = [c for c in closed if c["ts"] > int(last_seen)]
             if fresh:
-                # Pass the full recent candle history: pattern positions may be separated by gaps.
                 await process_new_closed(app, closed)
-        await process_pre(app, candles, now_ts)
     except Exception:
         log.exception("Помилка циклу перевірки ринку")
 
@@ -235,7 +213,7 @@ async def tick(app):
 async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     STATE["chat_id"] = update.effective_chat.id
     save_state()
-    await update.message.reply_text("🤖 Btc_5m_100% запущений. Аналізую BTC_USDT Futures, 5m.\nКоманди: /status /stats /help\nТепер цей чат отримуватиме PRE, SIGNAL та WIN/LOSS. Бот не торгує автоматично.")
+    await update.message.reply_text("🤖 Btc_5m_100% запущений. Аналізую BTC_USDT Futures, 5m.\nКоманди: /status /stats /help\nТепер цей чат отримуватиме SIGNAL та WIN/LOSS. Бот не торгує автоматично.")
 
 async def status_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     active = sum(1 for x in STATE["patterns"].values() if x.get("active"))
@@ -253,7 +231,7 @@ async def stats_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("\n".join(lines))
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("PRE — остання потрібна свічка формується; це ще не сигнал.\nSIGNAL — усі 6 заданих позицій підтверджені після закриття.\nWIN: серед наступних 6 свічок є хоча б одна у напрямку сигналу.\nLOSS: усі 6 наступних свічок протилежного кольору.\nDoji не вважається ні зеленим, ні червоним; неоднозначний результат позначається VOID.\nПроміжні свічки між позиціями шаблону можуть бути будь-якого кольору.")
+    await update.message.reply_text("SIGNAL — усі задані позиції шаблону підтверджені після закриття.\nWIN: перша свічка у напрямку сигналу серед наступних 6; результат WIN 1/6 ... WIN 6/6.\nLOSS: усі 6 наступних свічок протилежного кольору.\nDoji не вважається ні зеленим, ні червоним; неоднозначний результат позначається VOID.\nПроміжні свічки між позиціями шаблону можуть бути будь-якого кольору.")
 
 async def post_init(app):
     ensure_pattern_state()
@@ -272,6 +250,7 @@ def main():
     app.add_handler(CommandHandler("help", help_cmd))
     log.info("Starting Btc_5m_100%% with %s patterns", len(PATTERNS))
     app.run_polling(drop_pending_updates=True)
+
 
 if __name__ == "__main__":
     main()
