@@ -3,344 +3,21 @@
     "id": "P01",
     "positions": [
       1,
-      7,
-      11,
-      16,
-      18,
-      20
-    ],
-    "pattern": "RRGRRG",
-    "direction": "LONG",
-    "emoji": "🔴🔴🟢🔴🔴🟢",
-    "historical_signals": 858,
-    "historical_wins": 858,
-    "historical_losses": 0
-  },
-  {
-    "id": "P03",
-    "positions": [
-      1,
-      9,
-      10,
-      12,
-      17,
-      19
-    ],
-    "pattern": "GRGGRG",
-    "direction": "LONG",
-    "emoji": "🟢🔴🟢🟢🔴🟢",
-    "historical_signals": 836,
-    "historical_wins": 836,
-    "historical_losses": 0
-  },
-  {
-    "id": "P05",
-    "positions": [
-      1,
       3,
       7,
-      11,
-      14,
-      16
-    ],
-    "pattern": "RGRRRG",
-    "direction": "SHORT",
-    "emoji": "🔴🟢🔴🔴🔴🟢",
-    "historical_signals": 826,
-    "historical_wins": 826,
-    "historical_losses": 0
-  },
-  {
-    "id": "P06",
-    "positions": [
-      1,
-      7,
-      10,
-      14,
       15,
-      20
-    ],
-    "pattern": "RRGGGG",
-    "direction": "SHORT",
-    "emoji": "🔴🔴🟢🟢🟢🟢",
-    "historical_signals": 822,
-    "historical_wins": 822,
-    "historical_losses": 0
-  },
-  {
-    "id": "P09",
-    "positions": [
-      1,
-      2,
-      5,
-      6,
-      12,
-      16
-    ],
-    "pattern": "GRGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🔴🟢🟢🟢🟢",
-    "historical_signals": 810,
-    "historical_wins": 810,
-    "historical_losses": 0
-  },
-  {
-    "id": "P13",
-    "positions": [
-      1,
-      3,
-      7,
-      11,
-      12,
-      17
-    ],
-    "pattern": "GRGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🔴🟢🟢🟢🟢",
-    "historical_signals": 806,
-    "historical_wins": 806,
-    "historical_losses": 0
-  },
-  {
-    "id": "P14",
-    "positions": [
-      1,
-      4,
-      10,
-      11,
-      18,
-      19
-    ],
-    "pattern": "RGGGGR",
-    "direction": "SHORT",
-    "emoji": "🔴🟢🟢🟢🟢🔴",
-    "historical_signals": 806,
-    "historical_wins": 806,
-    "historical_losses": 0
-  },
-  {
-    "id": "P15",
-    "positions": [
-      1,
-      6,
-      10,
-      13,
-      18,
-      19
-    ],
-    "pattern": "RRRGGG",
-    "direction": "SHORT",
-    "emoji": "🔴🔴🔴🟢🟢🟢",
-    "historical_signals": 805,
-    "historical_wins": 805,
-    "historical_losses": 0
-  },
-  {
-    "id": "P17",
-    "positions": [
-      1,
-      3,
-      5,
-      8,
-      15,
-      20
-    ],
-    "pattern": "GRGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🔴🟢🟢🟢🟢",
-    "historical_signals": 803,
-    "historical_wins": 803,
-    "historical_losses": 0
-  },
-  {
-    "id": "P18",
-    "positions": [
-      1,
-      8,
-      13,
-      16,
-      19,
-      20
-    ],
-    "pattern": "RRGGGR",
-    "direction": "SHORT",
-    "emoji": "🔴🔴🟢🟢🟢🔴",
-    "historical_signals": 803,
-    "historical_wins": 803,
-    "historical_losses": 0
-  },
-  {
-    "id": "P19",
-    "positions": [
-      1,
-      6,
-      10,
-      14,
       17,
-      18
-    ],
-    "pattern": "GRGRRR",
-    "direction": "LONG",
-    "emoji": "🟢🔴🟢🔴🔴🔴",
-    "historical_signals": 798,
-    "historical_wins": 798,
-    "historical_losses": 0
-  },
-  {
-    "id": "P22",
-    "positions": [
-      1,
-      5,
-      6,
-      8,
-      13,
-      14
-    ],
-    "pattern": "RGGRRR",
-    "direction": "LONG",
-    "emoji": "🔴🟢🟢🔴🔴🔴",
-    "historical_signals": 795,
-    "historical_wins": 795,
-    "historical_losses": 0
-  },
-  {
-    "id": "P23",
-    "positions": [
-      1,
-      3,
-      5,
-      8,
-      13,
-      18
-    ],
-    "pattern": "RGRGGG",
-    "direction": "SHORT",
-    "emoji": "🔴🟢🔴🟢🟢🟢",
-    "historical_signals": 789,
-    "historical_wins": 789,
-    "historical_losses": 0
-  },
-  {
-    "id": "P27",
-    "positions": [
-      1,
-      5,
-      7,
-      11,
-      16,
-      19
-    ],
-    "pattern": "RGGRRR",
-    "direction": "LONG",
-    "emoji": "🔴🟢🟢🔴🔴🔴",
-    "historical_signals": 782,
-    "historical_wins": 782,
-    "historical_losses": 0
-  },
-  {
-    "id": "P28",
-    "positions": [
-      1,
-      3,
-      5,
-      6,
-      12,
-      16
-    ],
-    "pattern": "GRGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🔴🟢🟢🟢🟢",
-    "historical_signals": 781,
-    "historical_wins": 781,
-    "historical_losses": 0
-  },
-  {
-    "id": "P30",
-    "positions": [
-      1,
-      2,
-      10,
-      12,
-      18,
-      19
-    ],
-    "pattern": "RGGGRR",
-    "direction": "LONG",
-    "emoji": "🔴🟢🟢🟢🔴🔴",
-    "historical_signals": 777,
-    "historical_wins": 777,
-    "historical_losses": 0
-  },
-  {
-    "id": "P33",
-    "positions": [
-      1,
-      2,
-      13,
-      14,
-      16,
       20
     ],
-    "pattern": "RGGGGR",
+    "pattern": "GRRGGG",
     "direction": "SHORT",
-    "emoji": "🔴🟢🟢🟢🟢🔴",
-    "historical_signals": 774,
-    "historical_wins": 774,
+    "emoji": "🟢🔴🔴🟢🟢🟢",
+    "historical_signals": 0,
+    "historical_wins": 0,
     "historical_losses": 0
   },
   {
-    "id": "P35",
-    "positions": [
-      1,
-      4,
-      8,
-      13,
-      17,
-      19
-    ],
-    "pattern": "GGRRGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🔴🔴🟢🟢",
-    "historical_signals": 773,
-    "historical_wins": 773,
-    "historical_losses": 0
-  },
-  {
-    "id": "P36",
-    "positions": [
-      1,
-      3,
-      5,
-      6,
-      11,
-      16
-    ],
-    "pattern": "GRGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🔴🟢🟢🟢🟢",
-    "historical_signals": 772,
-    "historical_wins": 772,
-    "historical_losses": 0
-  },
-  {
-    "id": "P38",
-    "positions": [
-      1,
-      3,
-      7,
-      9,
-      14,
-      18
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 769,
-    "historical_wins": 769,
-    "historical_losses": 0
-  },
-  {
-    "id": "P40",
+    "id": "P02",
     "positions": [
       1,
       5,
@@ -352,297 +29,178 @@
     "pattern": "RGRRRR",
     "direction": "LONG",
     "emoji": "🔴🟢🔴🔴🔴🔴",
-    "historical_signals": 767,
-    "historical_wins": 767,
+    "historical_signals": 0,
+    "historical_wins": 0,
     "historical_losses": 0
   },
   {
-    "id": "P45",
+    "id": "P03",
+    "positions": [
+      1,
+      7,
+      11,
+      16,
+      18,
+      20
+    ],
+    "pattern": "RRGRRG",
+    "direction": "LONG",
+    "emoji": "🔴🔴🟢🔴🔴🟢",
+    "historical_signals": 0,
+    "historical_wins": 0,
+    "historical_losses": 0
+  },
+  {
+    "id": "P04",
+    "positions": [
+      1,
+      3,
+      7,
+      11,
+      14,
+      16
+    ],
+    "pattern": "RGRRRG",
+    "direction": "SHORT",
+    "emoji": "🔴🟢🔴🔴🔴🟢",
+    "historical_signals": 0,
+    "historical_wins": 0,
+    "historical_losses": 0
+  },
+  {
+    "id": "P05",
+    "positions": [
+      1,
+      6,
+      10,
+      13,
+      18,
+      19
+    ],
+    "pattern": "RRRGGG",
+    "direction": "SHORT",
+    "emoji": "🔴🔴🔴🟢🟢🟢",
+    "historical_signals": 0,
+    "historical_wins": 0,
+    "historical_losses": 0
+  },
+  {
+    "id": "P06",
     "positions": [
       1,
       2,
-      9,
-      11,
-      13,
+      5,
+      6,
+      12,
       16
+    ],
+    "pattern": "GRGGGG",
+    "direction": "SHORT",
+    "emoji": "🟢🔴🟢🟢🟢🟢",
+    "historical_signals": 0,
+    "historical_wins": 0,
+    "historical_losses": 0
+  },
+  {
+    "id": "P07",
+    "positions": [
+      1,
+      8,
+      13,
+      16,
+      19,
+      20
+    ],
+    "pattern": "RRGGGR",
+    "direction": "SHORT",
+    "emoji": "🔴🔴🟢🟢🟢🔴",
+    "historical_signals": 0,
+    "historical_wins": 0,
+    "historical_losses": 0
+  },
+  {
+    "id": "P08",
+    "positions": [
+      1,
+      4,
+      8,
+      13,
+      17,
+      19
     ],
     "pattern": "GGRRGG",
     "direction": "SHORT",
     "emoji": "🟢🟢🔴🔴🟢🟢",
-    "historical_signals": 748,
-    "historical_wins": 748,
+    "historical_signals": 0,
+    "historical_wins": 0,
     "historical_losses": 0
   },
   {
-    "id": "P47",
+    "id": "P09",
     "positions": [
       1,
-      3,
+      4,
+      10,
+      11,
+      18,
+      19
+    ],
+    "pattern": "RGGGGR",
+    "direction": "SHORT",
+    "emoji": "🔴🟢🟢🟢🟢🔴",
+    "historical_signals": 0,
+    "historical_wins": 0,
+    "historical_losses": 0
+  },
+  {
+    "id": "P10",
+    "positions": [
+      1,
       7,
+      10,
+      14,
       15,
-      17,
       20
     ],
-    "pattern": "GRRGGG",
+    "pattern": "RRGGGG",
     "direction": "SHORT",
-    "emoji": "🟢🔴🔴🟢🟢🟢",
-    "historical_signals": 748,
-    "historical_wins": 748,
+    "emoji": "🔴🔴🟢🟢🟢🟢",
+    "historical_signals": 0,
+    "historical_wins": 0,
     "historical_losses": 0
   },
   {
-    "id": "P50",
+    "id": "P11",
     "positions": [
       1,
-      7,
-      8,
-      13,
-      16,
-      18
-    ],
-    "pattern": "RRRRRG",
-    "direction": "LONG",
-    "emoji": "🔴🔴🔴🔴🔴🟢",
-    "historical_signals": 736,
-    "historical_wins": 736,
-    "historical_losses": 0
-  },
-  {
-    "id": "P51",
-    "positions": [
-      1,
-      2,
-      4,
-      7,
-      17,
-      19
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 735,
-    "historical_wins": 735,
-    "historical_losses": 0
-  },
-  {
-    "id": "P52",
-    "positions": [
-      1,
-      5,
-      6,
-      12,
-      16,
-      17
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 733,
-    "historical_wins": 733,
-    "historical_losses": 0
-  },
-  {
-    "id": "P54",
-    "positions": [
-      1,
-      6,
-      7,
-      11,
-      12,
-      17
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 731,
-    "historical_wins": 731,
-    "historical_losses": 0
-  },
-  {
-    "id": "P56",
-    "positions": [
-      1,
-      5,
-      12,
-      14,
-      17,
-      18
-    ],
-    "pattern": "GRRRRR",
-    "direction": "LONG",
-    "emoji": "🟢🔴🔴🔴🔴🔴",
-    "historical_signals": 726,
-    "historical_wins": 726,
-    "historical_losses": 0
-  },
-  {
-    "id": "P57",
-    "positions": [
-      1,
-      2,
-      4,
       9,
-      12,
-      19
-    ],
-    "pattern": "GGGGGR",
-    "direction": "LONG",
-    "emoji": "🟢🟢🟢🟢🟢🔴",
-    "historical_signals": 721,
-    "historical_wins": 721,
-    "historical_losses": 0
-  },
-  {
-    "id": "P58",
-    "positions": [
-      1,
-      4,
-      7,
-      9,
-      14,
-      19
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 720,
-    "historical_wins": 720,
-    "historical_losses": 0
-  },
-  {
-    "id": "P60",
-    "positions": [
-      1,
-      6,
-      7,
-      11,
-      13,
-      17
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 716,
-    "historical_wins": 716,
-    "historical_losses": 0
-  },
-  {
-    "id": "P63",
-    "positions": [
-      1,
-      5,
-      6,
       10,
       12,
-      17
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 708,
-    "historical_wins": 708,
-    "historical_losses": 0
-  },
-  {
-    "id": "P65",
-    "positions": [
-      1,
-      6,
-      7,
-      11,
-      13,
-      18
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 695,
-    "historical_wins": 695,
-    "historical_losses": 0
-  },
-  {
-    "id": "P66",
-    "positions": [
-      1,
-      4,
-      9,
-      14,
-      15,
-      19
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 694,
-    "historical_wins": 694,
-    "historical_losses": 0
-  },
-  {
-    "id": "P67",
-    "positions": [
-      1,
-      6,
-      8,
-      11,
-      13,
-      16
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 685,
-    "historical_wins": 685,
-    "historical_losses": 0
-  },
-  {
-    "id": "P68",
-    "positions": [
-      1,
-      4,
-      9,
-      14,
       17,
       19
     ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 684,
-    "historical_wins": 684,
+    "pattern": "GRGGRG",
+    "direction": "LONG",
+    "emoji": "🟢🔴🟢🟢🔴🟢",
+    "historical_signals": 0,
+    "historical_wins": 0,
     "historical_losses": 0
   },
   {
-    "id": "P70",
-    "positions": [
-      1,
-      7,
-      8,
-      14,
-      15,
-      18
-    ],
-    "pattern": "GGGGGG",
-    "direction": "SHORT",
-    "emoji": "🟢🟢🟢🟢🟢🟢",
-    "historical_signals": 677,
-    "historical_wins": 677,
-    "historical_losses": 0
-  },
-  {
-    "id": "P71",
+    "id": "P12",
     "positions": [
       1,
       2,
-      3,
       4,
-      6,
-      12
+      9,
+      12,
+      19
     ],
     "pattern": "GGGGGR",
-    "direction": "SHORT",
+    "direction": "LONG",
     "emoji": "🟢🟢🟢🟢🟢🔴",
-    "historical_signals": 673,
-    "historical_wins": 673,
+    "historical_signals": 0,
+    "historical_wins": 0,
     "historical_losses": 0
   }
 ]
