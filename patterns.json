@@ -68,23 +68,6 @@
     "historical_losses": 0
   },
   {
-    "id": "P05",
-    "positions": [
-      1,
-      6,
-      10,
-      13,
-      18,
-      19
-    ],
-    "pattern": "RRRGGG",
-    "direction": "SHORT",
-    "emoji": "🔴🔴🔴🟢🟢🟢",
-    "historical_signals": 0,
-    "historical_wins": 0,
-    "historical_losses": 0
-  },
-  {
     "id": "P06",
     "positions": [
       1,
@@ -165,23 +148,6 @@
     "pattern": "RRGGGG",
     "direction": "SHORT",
     "emoji": "🔴🔴🟢🟢🟢🟢",
-    "historical_signals": 0,
-    "historical_wins": 0,
-    "historical_losses": 0
-  },
-  {
-    "id": "P11",
-    "positions": [
-      1,
-      9,
-      10,
-      12,
-      17,
-      19
-    ],
-    "pattern": "GRGGRG",
-    "direction": "LONG",
-    "emoji": "🟢🔴🟢🟢🔴🟢",
     "historical_signals": 0,
     "historical_wins": 0,
     "historical_losses": 0

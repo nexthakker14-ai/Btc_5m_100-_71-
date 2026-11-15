@@ -1,6 +1,6 @@
 # Btc_5m_100% — Telegram signal bot
 
-Бот аналізує BTC_USDT perpetual futures на MEXC за 5-хвилинними свічками та 12 шаблонами із `patterns.json`. Він **не має API-ключів біржі та не відкриває угоди**.
+Бот аналізує BTC_USDT perpetual futures на MEXC за 5-хвилинними свічками та 10 шаблонами із `patterns.json`. Він **не має API-ключів біржі та не відкриває угоди**.
 
 ## Як запустити локально
 
