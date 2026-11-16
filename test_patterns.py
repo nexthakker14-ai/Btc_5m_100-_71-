@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 p = json.loads((Path(__file__).parent / "patterns.json").read_text(encoding="utf-8"))
 expected = {
-    "GRRGGG", "RGRRRR", "RRGRRG", "RGRRRG", "GRGGGG",
+    "GRRGGG", "RGRRRR", "RGRRRG", "GRGGGG",
     "RRGGGR", "GGRRGG", "RGGGGR", "RRGGGG", "GGGGGR",
 }
 assert len(p) == 10, len(p)

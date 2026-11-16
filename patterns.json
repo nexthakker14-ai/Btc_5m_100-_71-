@@ -34,23 +34,6 @@
     "historical_losses": 0
   },
   {
-    "id": "P03",
-    "positions": [
-      1,
-      7,
-      11,
-      16,
-      18,
-      20
-    ],
-    "pattern": "RRGRRG",
-    "direction": "LONG",
-    "emoji": "🔴🔴🟢🔴🔴🟢",
-    "historical_signals": 0,
-    "historical_wins": 0,
-    "historical_losses": 0
-  },
-  {
     "id": "P04",
     "positions": [
       1,
