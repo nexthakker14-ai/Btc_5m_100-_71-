@@ -73,7 +73,7 @@ def ensure_pattern_state():
     for p in PATTERNS:
         k = p["id"]
         if k not in STATE["patterns"]:
-            STATE["patterns"][k] = {"next_start_ts": None, "active": None, "pre_sent_for": None, "stats": {"signals": 0, "wins": 0, "losses": 0}}
+            STATE["patterns"][k] = {"next_start_ts": None, "pending": None, "active": None, "pre_sent_for": None, "stats": {"signals": 0, "wins": 0, "losses": 0}}
             changed = True
     if changed:
         save_state()
@@ -89,7 +89,8 @@ def signal_text(p, final_ts):
             f"📊 MEXC Futures: BTC_USDT\n⏱ Таймфрейм: 5 хв\n"
             f"🧩 Шаблон: {p['emoji']} ({p['pattern']})\n"
             f"📍 Позиції: {positions}\n"
-            f"🕒 Закриття шаблону: {fmt_time(final_ts)}\n"
+            f"✅ Підтвердження: 3 свічки {p['confirmation']} поспіль\n"
+            f"🕒 Закриття 3-ї підтверджувальної свічки: {fmt_time(final_ts)}\n"
             f"🎯 Перевірка: наступні 6 свічок по 5 хв\n"
             f"ℹ️ Це сигнал для тестування, не гарантія результату. Бот не відкриває угоди.")
 
@@ -109,6 +110,24 @@ async def process_new_closed(app, closed):
     for p in PATTERNS:
         ps = STATE["patterns"][p["id"]]
         active = ps.get("active")
+        pending = ps.get("pending")
+        if pending and not active:
+            confirm_color = "G" if p["confirmation"] == "LONG" else "R"
+            for c in closed:
+                if c["ts"] <= pending.get("last_checked_ts", pending["base_ts"]):
+                    continue
+                color = candle_color(c["open"], c["close"])
+                pending["last_checked_ts"] = c["ts"]
+                pending["streak"] = pending["streak"] + 1 if color == confirm_color else 0
+                if pending["streak"] >= 3:
+                    signal_ts = c["ts"]
+                    ps["active"] = {"signal_ts": signal_ts, "checked": 0, "colors": [], "last_checked_ts": signal_ts}
+                    ps["pending"] = None
+                    await send_message(app, signal_text(p, signal_ts))
+                    active = ps["active"]
+                    break
+            if ps.get("pending"):
+                continue
         if active:
             for c in closed:
                 if c["ts"] <= active["signal_ts"] or c["ts"] <= active.get("last_checked_ts", active["signal_ts"]):
@@ -162,8 +181,8 @@ async def process_new_closed(app, closed):
                 continue
             if "D" not in req and "".join(req) == p["pattern"]:
                 final_ts = start_ts + (p["positions"][-1] - 1) * TF_SECONDS
-                ps["active"] = {"signal_ts": final_ts, "checked": 0, "colors": [], "last_checked_ts": final_ts}
-                await send_message(app, signal_text(p, final_ts))
+                ps["pending"] = {"base_ts": final_ts, "last_checked_ts": final_ts, "streak": 0}
+                start_ts = final_ts + TF_SECONDS
                 break
             start_ts += TF_SECONDS
         ps["next_start_ts"] = start_ts
@@ -203,7 +222,8 @@ async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def status_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     active = sum(1 for x in STATE["patterns"].values() if x.get("active"))
-    await update.message.reply_text(f"🟢 Бот працює\nШаблонів: {len(PATTERNS)}\nАктивних перевірок результату: {active}\nОстання закрита свічка: {STATE.get('last_closed_ts')}")
+    pending = sum(1 for x in STATE["patterns"].values() if x.get("pending"))
+    await update.message.reply_text(f"🟢 Бот працює\nШаблонів: {len(PATTERNS)}\nОчікують 3 підтверджувальні свічки: {pending}\nАктивних перевірок результату: {active}\nОстання закрита свічка: {STATE.get('last_closed_ts')}")
 
 async def stats_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     s = STATE["stats"]
@@ -217,7 +237,7 @@ async def stats_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("\n".join(lines))
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("SIGNAL — усі 6 заданих позицій підтверджені після закриття.\nWIN 1/6, 2/6, 3/6, 4/6, 5/6 або 6/6 — номер першої свічки у напрямку сигналу.\nLOSS 6/6 — усі шість наступних свічок протилежного кольору.\nDoji не вважається ні зеленою, ні червоною свічкою; неоднозначний результат позначається VOID.\nПроміжні свічки між позиціями шаблону можуть бути будь-якого кольору.")
+    await update.message.reply_text("Спочатку мають закритися всі 6 позицій базового шаблону, потім — 3 поспіль підтверджувальні свічки: LONG (зелені) або SHORT (червоні), залежно від шаблону. Лише після третьої надсилається протилежний SIGNAL. Якщо колір не збігається, лічильник серії скидається.\nWIN 1/6, 2/6, 3/6, 4/6, 5/6 або 6/6 — номер першої свічки у напрямку сигналу.\nLOSS 6/6 — усі шість наступних свічок протилежного кольору.\nDoji не вважається ні зеленою, ні червоною свічкою; неоднозначний результат позначається VOID.\nПроміжні свічки між позиціями шаблону можуть бути будь-якого кольору.")
 
 async def post_init(app):
     ensure_pattern_state()
